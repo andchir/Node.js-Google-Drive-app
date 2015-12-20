@@ -15,14 +15,12 @@ try {
  */
 var Model = function( config ) {
     
-    var self = this;
-    
     var google = require('googleapis'),
         OAuth2 = google.auth.OAuth2;
     
     this.scopes = config.scopes;
     this.auth = new OAuth2(config.client_id, config.client_secret, config.redirect_url);
-    service_drive = google.drive({ version: 'v2', auth: self.auth });
+    service_drive = google.drive({ version: 'v2', auth: this.auth });
     
     /**
      * Check authorisation
@@ -39,7 +37,8 @@ var Model = function( config ) {
      */
     this.getNewToken = function( authorizationCode, callback ) {
         
-        self.auth.getToken(authorizationCode, function(err, token) {
+        var self = this;
+        this.auth.getToken(authorizationCode, function(err, token) {
             if (err) {
                 console.log('Error while trying to retrieve access token', err);
                 return;
@@ -59,7 +58,7 @@ var Model = function( config ) {
     this.getList = function(folderId, callback){
         
         service_drive.files.list({
-            auth: self.auth,
+            auth: this.auth,
             q: "'" + folderId + "' in parents and trashed=false",
             orderBy: 'modifiedDate desc,title'
         }, function(err, response) {
