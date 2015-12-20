@@ -1,0 +1,11 @@
+{
+    "client_id": "561323866387-5b3j02fhq5ktfa6inhbrje534u0sm9bb.apps.googleusercontent.com",
+    
+    "client_secret": "1gyR6RLwVAnXiFXH8yDJsSuk",
+    
+    "redirect_url": "http://127.0.0.1:3000/auth/google/return",
+    
+    "scopes": [
+        "https://www.googleapis.com/auth/drive.metadata.readonly"
+    ]
+}

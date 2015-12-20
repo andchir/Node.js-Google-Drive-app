@@ -2,16 +2,11 @@
 /**
  * Application - Google Drive listing
  */
-/** Define API settings */
-var GOOGLE_CLIENT_ID = '561323866387-5b3j02fhq5ktfa6inhbrje534u0sm9bb.apps.googleusercontent.com',
-    GOOGLE_CLIENT_SECRET = '1gyR6RLwVAnXiFXH8yDJsSuk',
-    REDIRECT_URL = 'http://127.0.0.1:3000/auth/google/return';
 
 var express = require('express'),
-    DriveLib = require('./libs/drive');
+    routes = require(__dirname + '/routes');
 
-var app = express(),
-    driveLib = new DriveLib(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, REDIRECT_URL);
+var app = express();
 
 /**
  * Configuration
@@ -23,11 +18,11 @@ app.use(express.static(__dirname + '/public'));
 /**
  * Routes
  */
-app.get('/', driveLib.routes.index);
-app.get('/auth/google', driveLib.routes.auth);
-app.get('/auth/google/return', driveLib.routes.auth_return);
-app.get('/folders/:folderId', driveLib.routes.folders);
-app.get('/logout', driveLib.routes.logout);
+app.get('/', routes.index);
+app.get('/auth/google', routes.auth);
+app.get('/auth/google/return', routes.auth_return);
+app.get('/folders/:folderId', routes.folders);
+app.get('/logout', routes.logout);
 
 /**
  * Start server
