@@ -1,0 +1,43 @@
+extends layout
+
+block content
+    .row
+        .col-md-8.col-md-offset-2
+            
+            if authorised
+                .pull-right
+                    a.btn.btn-default(href='/logout') Выйти
+            
+            div.page-title
+                h1 Мой Google Drive
+            
+            if !authorised
+                .text-center
+                    a.btn.btn-primary(href='/auth/google') Войти через Google
+                
+            else
+                h2 Список файлов
+                
+                if files.length == 0
+                    p Нет файлов.
+                else
+                    ul.list-group
+                        if folderId != 'root'
+                            li.list-group-item.list-group-item-warning
+                                a.glyphicon.glyphicon-arrow-up.no-underline(href='/')
+                        
+                        each file in files
+                        
+                            if file.mimeType == 'application/vnd.google-apps.folder'
+                                li.list-group-item.list-group-item-warning
+                                    strong
+                                        a.no-underline(href='/folders/' + file.id)
+                                            img(src=file.iconLink)
+                                            span= ' ' + file.title
+                            else
+                                li.list-group-item
+                                    img(src=file.iconLink)
+                                    span= ' ' + file.title
+                                    if file.fileSize
+                                        span.badge= (file.fileSize / 1024).toFixed(2) + ' KB'
+                
