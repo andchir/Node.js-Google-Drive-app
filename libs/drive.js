@@ -16,7 +16,6 @@ module.exports = function(client_id, client_secret, redirect_url) {
     var SCOPES = [
             'https://www.googleapis.com/auth/drive.metadata.readonly'
         ],
-        google = require('googleapis'),
         service_drive = google.drive({ version: 'v2', auth: self.auth });
     
     /**
