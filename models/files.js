@@ -60,7 +60,7 @@ var Model = function( config ) {
         service_drive.files.list({
             auth: this.auth,
             q: "'" + folderId + "' in parents and trashed=false",
-            orderBy: 'modifiedDate desc,title'
+            orderBy: 'folder,modifiedDate desc,title'
         }, function(err, response) {
             if (err) {
                 return;
